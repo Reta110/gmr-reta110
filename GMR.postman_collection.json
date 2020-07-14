@@ -1,0 +1,547 @@
+{
+	"info": {
+		"_postman_id": "2b1844ad-d2f9-4efd-8eb8-f019d5a80425",
+		"name": "GMR",
+		"description": "Giant Monkey Robot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/oauth/token -Submitter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2001132f-1d9f-472a-bd93-9fa2debb4ddb",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"access_token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "asdf",
+						"type": "text",
+						"value": "asdf"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "submitter@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456789",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "7AKocQKzWjBFumvLBrOy65Ei3uxdEtHf0w9mPxbf",
+							"description": "Passport client",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "*",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://gmr.test/oauth/token",
+					"protocol": "http",
+					"host": [
+						"gmr",
+						"test"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/oauth/token - Processor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6c01ab90-2b5e-4dd3-9799-c744e5143c95",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.globals.set(\"access_token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "asdf",
+						"type": "text",
+						"value": "asdf"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "processor@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456789",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "7AKocQKzWjBFumvLBrOy65Ei3uxdEtHf0w9mPxbf",
+							"description": "Passport client",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "*",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://gmr.test/oauth/token",
+					"protocol": "http",
+					"host": [
+						"gmr",
+						"test"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "asdf",
+						"value": "asdf",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://gmr.test/api/user",
+					"protocol": "http",
+					"host": [
+						"gmr",
+						"test"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/jobs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "asdf",
+						"value": "asdf",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"jobs\": [\n        {\n            \"title\": \"hola2\",\n            \"command\": \"here\",\n            \"priority\": 1,\n            \"processor_id\": 1\n        },\n        {\n            \"title\": \"hola3\",\n            \"command\": \"here\",\n            \"priority\": 2,\n            \"processor_id\": 1\n        },\n        {\n            \"title\": \"hola4\",\n            \"command\": \"here\",\n            \"priority\": 3,\n            \"processor_id\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://gmr.test/api/jobs",
+					"protocol": "http",
+					"host": [
+						"gmr",
+						"test"
+					],
+					"path": [
+						"api",
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/jobs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "asdf",
+						"value": "asdf",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"jobs\": [\n        {\n            \"command\": \"here\",\n            \"priority\": 1,\n            \"processor_id\": 1\n        },\n        {\n            \"title\": \"hola3\",\n            \"command\": \"here\",\n            \"priority\": 2,\n            \"processor_id\": 1\n        },\n        {\n            \"title\": \"hola4\",\n            \"command\": \"here\",\n            \"priority\": 3,\n            \"processor_id\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://gmr.test/api/jobs",
+					"protocol": "http",
+					"host": [
+						"gmr",
+						"test"
+					],
+					"path": [
+						"api",
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/next",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "asdf",
+						"type": "text",
+						"value": "asdf"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://gmr.test/api/next",
+					"protocol": "http",
+					"host": [
+						"gmr",
+						"test"
+					],
+					"path": [
+						"api",
+						"next"
+					]
+				},
+				"description": "Take process"
+			},
+			"response": []
+		},
+		{
+			"name": "/status/:id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "asdf",
+						"type": "text",
+						"value": "asdf"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://gmr.test/api/status/1",
+					"protocol": "http",
+					"host": [
+						"gmr",
+						"test"
+					],
+					"path": [
+						"api",
+						"status",
+						"1"
+					]
+				},
+				"description": "Take process"
+			},
+			"response": []
+		},
+		{
+			"name": "/jobs/:id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "asdf",
+						"value": "asdf",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Reta",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "here",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "100",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "processor_id",
+							"value": "2",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://gmr.test/api/jobs/1",
+					"protocol": "http",
+					"host": [
+						"gmr",
+						"test"
+					],
+					"path": [
+						"api",
+						"jobs",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/finish/:id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "asdf",
+						"type": "text",
+						"value": "asdf"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "hola2",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "description",
+							"value": "here",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "processor_id",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://gmr.test/api/finish/3",
+					"protocol": "http",
+					"host": [
+						"gmr",
+						"test"
+					],
+					"path": [
+						"api",
+						"finish",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "92266001-d262-4081-a0f0-dfb335ce6796",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a923ebfd-189d-422b-87a7-37d6348289ff",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
