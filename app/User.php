@@ -1,0 +1,65 @@
+<?php
+
+namespace App;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
+
+class User extends Authenticatable
+{
+    use HasApiTokens, Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password', 'type', 'busy',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    public function submits()
+    {
+        return $this->hasMany(Job::class, 'user_id', 'id');
+    }
+
+    public function process()
+    {
+        return $this->hasMany(Job::class, 'processor_id', 'id');
+    }
+
+    public function isBusy()
+    {
+        return $this->busy == 1;
+    }
+
+    public function isProcessor()
+    {
+        return $this->type == 'processor';
+    }
+
+    public function isSubmitter()
+    {
+        return $this->type == 'submitter';
+    }
+}
